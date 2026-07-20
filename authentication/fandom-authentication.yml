@@ -1,0 +1,56 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.mediawiki.org/wiki/API:Authentication
+note: >-
+  Fandom runs MediaWiki 1.43.9 (confirmed live via
+  api.php?action=query&meta=siteinfo). It exposes the standard MediaWiki Action
+  API authentication surface. No bespoke Fandom auth spec is published; this
+  profile is grounded in the confirmed MediaWiki generator and the upstream
+  MediaWiki authentication documentation.
+summary:
+  types:
+  - session
+  - oauth2
+  - oauth1
+  token_based: true
+  api_key_in: []
+  oauth2_flows:
+  - authorizationCode
+  anonymous_read: true
+schemes:
+- name: AnonymousRead
+  type: none
+  description: >-
+    Read modules (query, parse, opensearch, feed*) are available anonymously.
+    Public read access is the default for content wikis; some private wikis gate
+    reads behind login.
+- name: CsrfToken
+  type: token
+  description: >-
+    All write actions (edit, upload, move, delete, etc.) require a CSRF token
+    obtained from action=query&meta=tokens&type=csrf, plus an authenticated
+    session cookie. Distinct token types exist (csrf, login, createaccount,
+    patrol, rollback, userrights, watch, deleteglobalaccount).
+- name: ClientLogin
+  type: session
+  description: >-
+    Interactive/username-password login via action=clientlogin using AuthManager
+    (the modern replacement for the legacy action=login). Establishes a session
+    cookie carried on subsequent write requests.
+- name: BotPassword
+  type: session
+  description: >-
+    Scoped, revocable credentials created at Special:BotPasswords for automated
+    clients. Used with action=login (or clientlogin) to obtain a bot session
+    with a restricted grant set, without exposing the account password.
+- name: OAuth
+  type: oauth2
+  description: >-
+    MediaWiki Extension:OAuth exposes OAuth 1.0a and OAuth 2.0 authorization at
+    Special:OAuth for registered consumers, issuing owner-only or full
+    authorization-code tokens with grant-based scopes. Availability of the OAuth
+    consumer registration flow varies by Fandom deployment.
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://community.fandom.com/wiki/Special:OAuth/authorize
+    tokenUrl: https://community.fandom.com/wiki/Special:OAuth/token
