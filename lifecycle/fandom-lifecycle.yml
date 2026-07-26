@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.mediawiki.org/wiki/API:Main_page
+note: >-
+  Fandom serves the MediaWiki Action API, whose lifecycle is governed by the
+  upstream MediaWiki stable-interface and API deprecation practice. Fandom runs
+  MediaWiki 1.43.9 (confirmed live). No Fandom-specific public status page or SLA
+  was found during probing, so neither is asserted.
+versioning:
+  scheme: unversioned-continuous
+  current: MediaWiki 1.43.9
+  docs: https://www.mediawiki.org/wiki/API:Main_page
+  note: >-
+    The Action API has no path version; it evolves continuously and signals
+    change through in-response deprecation warnings.
+deprecation:
+  policy_url: https://www.mediawiki.org/wiki/Stable_interface_policy
+  mechanism: >-
+    Deprecated modules/parameters emit machine-readable warnings in the response
+    `warnings` structure (e.g. apiwarn-deprecation) rather than being removed
+    abruptly. Clients should honor `apihighlimits`, `maxlag`, and warning
+    signals.
+  sunset_header: false
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+deprecated_operations: []

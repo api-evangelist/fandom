@@ -1,0 +1,82 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.mediawiki.org/wiki/API:Main_page
+note: >-
+  Cross-cutting request/response conventions of the MediaWiki Action API that
+  Fandom serves at /api.php on every wiki (confirmed MediaWiki 1.43.9). Grounded
+  in the live api.php help/paraminfo surface and upstream MediaWiki API docs.
+base_pattern: https://<wiki>.fandom.com/api.php
+authentication:
+  ref: authentication/fandom-authentication.yml
+  style: session-cookie + CSRF token; OAuth (Extension:OAuth); bot passwords
+request:
+  transport: HTTP GET (reads) / POST (writes)
+  entry_point: single /api.php endpoint; the operation is selected by the
+    `action` parameter (120 action modules confirmed live), not by path.
+  format:
+    param: format
+    default: jsonfm (HTML-wrapped) in browser; json for clients
+    values: [json, jsonfm, xml, xmlfm, php, rawfm, none]
+    formatversion: >-
+      formatversion=2 selects the modern, cleaner JSON shape (booleans as true,
+      no "*" content keys); formatversion=1 is legacy.
+  errorformat:
+    param: errorformat
+    values: [bc, plaintext, wikitext, html, raw]
+    note: errorformat + errorlang control the structure/localisation of errors.
+pagination:
+  style: continuation-token
+  description: >-
+    List/generator queries return a `continue` object; pass its members back on
+    the next request to page through results. Use `rawcontinue` for the legacy
+    query-continue shape. Page size is controlled per-list limit params
+    (e.g. aplimit, srlimit), capped at 500 (5000 for clients with apihighlimits).
+  request_params: [continue, rawcontinue, <list>limit]
+  response_fields: [continue, batchcomplete]
+idempotency:
+  supported: false
+  note: >-
+    The Action API has no Idempotency-Key header. Edit safety is instead handled
+    by CSRF tokens plus optimistic concurrency: `basetimestamp` and
+    `starttimestamp` on action=edit trigger edit-conflict detection, and `nocreate`
+    / `createonly` guard create-vs-update. These prevent lost updates but are not
+    a request-replay idempotency contract, so no Idempotency pointer is emitted.
+concurrency:
+  maxlag:
+    param: maxlag
+    description: >-
+      Cooperative load shedding (RFC-style). Clients set maxlag (seconds); if
+      replication lag exceeds it the API returns HTTP 503 with a Retry-After
+      header and a `maxlag` error, and the client must back off.
+  assert:
+    param: assert
+    values: [user, bot, anon]
+    description: assert=user/bot fails the request if the session is not logged in
+      / not a bot, guarding against acting while logged out.
+rate_limiting:
+  mechanism: >-
+    Per-action rate limits (MediaWiki $wgRateLimits) enforced server-side; on
+    breach the API returns a `ratelimited` error. Combined with maxlag-based
+    backoff. No published numeric quota; the etiquette guidance is serial (not
+    parallel) requests and honoring Retry-After.
+  signal: HTTP 429 / Retry-After; `ratelimited` and `maxlag` error codes
+versioning:
+  scheme: unversioned-continuous
+  note: >-
+    The Action API is a single continuously-evolving interface with no version
+    in the path. Compatibility is managed via deprecation warnings surfaced in
+    the response (see lifecycle/fandom-lifecycle.yml) rather than version pinning.
+error_envelope:
+  ref: MediaWiki structured errors
+  shape: >-
+    Errors return an `errors` array (errorformat!=bc) or a single `error`
+    object (errorformat=bc) with `code`, `text`/`info`, and `module`. Warnings
+    surface in a parallel `warnings` structure. Not RFC 9457 problem+json.
+tracing:
+  request_id: >-
+    Responses may carry an X-Request-Id / X-Served-By header from the CDN edge;
+    the API itself does not require a client-supplied request-id.
+cross_links:
+  authentication: authentication/fandom-authentication.yml
+  lifecycle: lifecycle/fandom-lifecycle.yml
+  conformance: conformance/fandom-conformance.yml

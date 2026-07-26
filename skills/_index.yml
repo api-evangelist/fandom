@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: generated
+source: >-
+  Grounded in the live Fandom MediaWiki Action API module list
+  (api.php?action=paraminfo&modules=main); every action referenced below exists
+  verbatim in that list.
+api: https://community.fandom.com/api.php
+skills:
+- file: fandom-search-wiki-content.md
+  name: Search a Fandom wiki
+  api: https://community.fandom.com/api.php
+  operations: [opensearch, query]
+- file: fandom-read-and-parse-page.md
+  name: Read and render a Fandom page
+  api: https://community.fandom.com/api.php
+  operations: [query, parse]
+- file: fandom-authenticated-edit.md
+  name: Make an authenticated edit
+  api: https://community.fandom.com/api.php
+  operations: [query, clientlogin, edit]

@@ -1,0 +1,52 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: >-
+  Derived from the live MediaWiki Action API module list
+  (api.php?action=paraminfo&modules=main) served by Fandom (MediaWiki 1.43.9).
+  No official Fandom-hosted MCP server was found; this is a candidate tool
+  surface mapped from real action modules.
+server:
+  name: fandom
+  transport: http
+  base: https://<wiki>.fandom.com/api.php
+  note: >-
+    One deployment per wiki subdomain. Tools below map to confirmed live action
+    modules; a hosting layer would translate MCP tool calls into Action API
+    requests with format=json&formatversion=2.
+tools:
+- name: search_wiki
+  description: Full-text and OpenSearch search across a Fandom wiki's pages.
+  source_operation: api.php?action=opensearch
+- name: query_pages
+  description: Read page metadata, content, links, categories, and revisions via
+    the query module and its prop/list/meta submodules.
+  source_operation: api.php?action=query
+- name: parse_page
+  description: Render wikitext or a page to HTML, sections, categories, and
+    templates.
+  source_operation: api.php?action=parse
+- name: get_site_info
+  description: Retrieve wiki configuration, namespaces, statistics, and generator
+    version.
+  source_operation: api.php?action=query&meta=siteinfo
+- name: expand_templates
+  description: Expand wikitext templates server-side.
+  source_operation: api.php?action=expandtemplates
+- name: get_page_images
+  description: Serve/inspect images associated with a page (imageserving).
+  source_operation: api.php?action=imageserving
+- name: get_csrf_token
+  description: Obtain CSRF and other action tokens required for write operations.
+  source_operation: api.php?action=query&meta=tokens
+- name: edit_page
+  description: Create or update a page (requires auth + CSRF token).
+  source_operation: api.php?action=edit
+  write: true
+- name: upload_file
+  description: Upload a media file (requires auth + CSRF token).
+  source_operation: api.php?action=upload
+  write: true
+- name: feed_recent_changes
+  description: Retrieve a wiki's recent changes as a syndication feed.
+  source_operation: api.php?action=feedrecentchanges

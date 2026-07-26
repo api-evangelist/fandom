@@ -1,0 +1,36 @@
+generated: '2026-07-19'
+method: derived
+source: >-
+  Derived from the live Fandom MediaWiki Action API (MediaWiki 1.43.9) module
+  list and behavior, plus upstream MediaWiki standards support.
+standards:
+- id: opensearch
+  conforms: true
+  evidence: action=opensearch implements the OpenSearch suggestions protocol.
+- id: rsd
+  conforms: true
+  evidence: action=rsd emits a Really Simple Discovery document.
+- id: oauth2
+  conforms: true
+  evidence: MediaWiki Extension:OAuth exposes OAuth 2.0 (and 1.0a) at Special:OAuth.
+- id: oauth1
+  conforms: true
+  evidence: Extension:OAuth supports OAuth 1.0a consumers.
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration served (probed 403/absent).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use MediaWiki's structured errors envelope, not application/problem+json.
+- id: rest
+  conforms: false
+  evidence: >-
+    The primary interface is the RPC-style Action API (single /api.php endpoint,
+    action parameter). A MediaWiki REST API (/w/rest.php) exists upstream but was
+    not reachable on Fandom hosts during probing (403).
+- id: json
+  conforms: true
+  evidence: format=json / formatversion=2 returns structured JSON responses.
+- id: pagination
+  conforms: true
+  evidence: Continuation-token pagination (continue / rawcontinue).

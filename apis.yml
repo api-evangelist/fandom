@@ -1,8 +1,17 @@
 aid: fandom
 name: Fandom
-description: 'Fandom is a company surfaced as a portfolio company of bessemer-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. Sector: consumer. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: 'Fandom (formerly Wikia) is the world''s largest entertainment fan-wiki
+  platform, hosting hundreds of thousands of community-run wikis covering television,
+  film, games, anime, and pop culture. Every Fandom wiki runs on MediaWiki (currently
+  1.43.9, PHP 8.3) and exposes the standard MediaWiki Action API at /api.php on each
+  wiki subdomain, giving programmatic read and write access to page content, revisions,
+  full-text and OpenSearch search, media files, templates, and account operations.
+  Fandom layers its own extension modules on top of core MediaWiki (create-new-wiki,
+  theme designer, interactive maps, portable infoboxes, embedded video, notifications).
+  Fandom does not publish a bespoke OpenAPI; the self-documenting api.php help endpoint,
+  the Fandom Developers Wiki (dev.fandom.com), and the upstream MediaWiki API docs
+  are the reference surface. This profile was surfaced as a portfolio company of Bessemer
+  Venture Partners and enriched from Fandom''s live, public API.'
 url: https://raw.githubusercontent.com/api-evangelist/fandom/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,13 +19,54 @@ x-backed-by:
 - bessemer-venture-partners
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Consumer
-apis: []
+- Wiki
+- MediaWiki
+- Media
+- Entertainment
+- Community
+- Content
+- Fan Community
+image: https://images.wikia.com/central/images/b/bc/Wiki.png
+apis:
+- name: Fandom MediaWiki Action API
+  description: 'The standard MediaWiki Action API served at /api.php on every Fandom
+    wiki subdomain (e.g. community.fandom.com, starwars.fandom.com). Provides read/write
+    access via 120 action modules including query, parse, edit, upload, opensearch,
+    login/clientlogin, and Fandom-specific extensions (createnewwiki, savetheme, getmap,
+    infobox, embedvideo). Self-documenting via action=help and action=paraminfo. Running
+    MediaWiki 1.43.9.'
+  humanURL: https://community.fandom.com/wiki/Help:API
+  baseURL: https://community.fandom.com/api.php
+  tags:
+  - Wiki
+  - MediaWiki
+  - Content
+  - Search
+  properties:
+  - type: APIReference
+    url: https://www.mediawiki.org/wiki/API:Main_page
+  - type: Authentication
+    url: authentication/fandom-authentication.yml
+  - type: Conventions
+    url: conventions/fandom-conventions.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +75,42 @@ maintainers:
 common:
 - type: Website
   url: https://www.fandom.com/home
+- type: DeveloperPortal
+  url: https://dev.fandom.com/wiki/Fandom_Developers_Wiki
+- type: Documentation
+  url: https://community.fandom.com/wiki/Help:API
+- type: APIReference
+  url: https://www.mediawiki.org/wiki/API:Main_page
+- type: GettingStarted
+  url: https://www.mediawiki.org/wiki/API:Tutorial
+- type: Support
+  url: https://community.fandom.com/wiki/Community_Central
+- type: GitHubOrganization
+  url: https://github.com/Wikia
+- type: TermsOfService
+  url: https://www.fandom.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.fandom.com/privacy-policy
+- type: Authentication
+  url: authentication/fandom-authentication.yml
+- type: Conventions
+  url: conventions/fandom-conventions.yml
+- type: MCPServer
+  url: mcp/fandom-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/fandom-llms.txt
+- type: DomainSecurity
+  url: security/fandom-domain-security.yml
+- type: Conformance
+  url: conformance/fandom-conformance.yml
+- type: Lifecycle
+  url: lifecycle/fandom-lifecycle.yml
+- type: Packages
+  url: packages/fandom-packages.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

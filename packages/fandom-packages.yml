@@ -1,0 +1,36 @@
+generated: '2026-07-19'
+method: derived
+source: >-
+  Fandom publishes no first-party API client SDK. These are the widely-used
+  community MediaWiki Action API clients that work against Fandom's /api.php
+  (Fandom runs standard MediaWiki 1.43.9). None are first-party to Fandom, so
+  official is false and no SDKs pointer is wired.
+packages:
+- language: python
+  registry: pypi
+  name: mwclient
+  url: https://pypi.org/project/mwclient/
+  install: pip install mwclient
+  official: false
+  note: General-purpose MediaWiki Action API client library.
+- language: python
+  registry: pypi
+  name: pywikibot
+  url: https://pypi.org/project/pywikibot/
+  install: pip install pywikibot
+  official: false
+  note: The canonical MediaWiki bot framework; configurable against Fandom wikis.
+- language: javascript
+  registry: npm
+  name: nodemw
+  url: https://www.npmjs.com/package/nodemw
+  install: npm install nodemw
+  official: false
+  note: Node.js MediaWiki Action API client.
+- language: javascript
+  registry: npm
+  name: mwn
+  url: https://www.npmjs.com/package/mwn
+  install: npm install mwn
+  official: false
+  note: Modern TypeScript/JavaScript MediaWiki bot framework.

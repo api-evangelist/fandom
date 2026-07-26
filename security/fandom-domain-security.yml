@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.fandom.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 13 12:56:52 2026 GMT
+  hsts: null
+- host: community.fandom.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 14 17:31:30 2026 GMT
+  hsts: null
+domains:
+- domain: fandom.com
+  dnssec: false
+  caa:
+  - 0 issue "globalsign.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog"
+  - 0 iodef "mailto:domains@fandom.com"
+  - 0 iodef "mailto:ops-l@fandom.com"
+  - 0 issue "amazon.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

@@ -1,0 +1,30 @@
+# Fandom
+
+> Fandom (formerly Wikia) is the world's largest entertainment fan-wiki platform, hosting hundreds of thousands of community-run wikis. Every wiki runs on MediaWiki (1.43.9) and exposes the standard MediaWiki Action API at /api.php on its subdomain, with read/write access to pages, revisions, search, media, and accounts, plus Fandom extension modules.
+
+## APIs
+
+- [Fandom MediaWiki Action API](https://community.fandom.com/wiki/Help:API): 120 action modules served at https://community.fandom.com/api.php (and every <wiki>.fandom.com/api.php). Self-documenting via action=help / action=paraminfo.
+
+## Docs
+
+- [Fandom Developers Wiki](https://dev.fandom.com/wiki/Fandom_Developers_Wiki): Fandom's developer community hub.
+- [MediaWiki API: Main page](https://www.mediawiki.org/wiki/API:Main_page): upstream reference for the Action API.
+- [MediaWiki API tutorial](https://www.mediawiki.org/wiki/API:Tutorial): getting-started guide.
+- [MediaWiki API authentication](https://www.mediawiki.org/wiki/API:Authentication): login, bot passwords, OAuth.
+- [Community Central](https://community.fandom.com/wiki/Community_Central): support and community hub.
+
+## Artifacts
+
+- [Authentication profile](authentication/fandom-authentication.yml): session + CSRF tokens, bot passwords, OAuth.
+- [API conventions](conventions/fandom-conventions.yml): format, continuation pagination, maxlag, assert, error envelope.
+- [Conformance](conformance/fandom-conformance.yml): OpenSearch, RSD, OAuth2, JSON, pagination.
+- [Lifecycle](lifecycle/fandom-lifecycle.yml): unversioned continuous API, MediaWiki deprecation practice.
+- [MCP candidate tools](mcp/fandom-mcp.yml): tool surface derived from the live action modules.
+- [Community client packages](packages/fandom-packages.yml): mwclient, pywikibot, nodemw, mwn.
+- [Agent skills](skills/_index.yml): search, read/parse, authenticated edit.
+
+## Legal
+
+- [Terms of Use](https://www.fandom.com/terms-of-use)
+- [Privacy Policy](https://www.fandom.com/privacy-policy)
