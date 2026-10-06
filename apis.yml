@@ -44,7 +44,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-10-06'
 tags:
 - Company
 - Consumer
@@ -84,6 +84,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://about.fandom.com/newsroom
+  type: Blog
 - type: Website
   url: https://www.fandom.com/home
 - type: DeveloperPortal
